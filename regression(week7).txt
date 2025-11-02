@@ -1,0 +1,38 @@
+# Week 7
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import pandas as pd
+# Data with 3 values
+data = {
+'Size': [6, 10, 14],
+'Cost': [100, 200, 300]
+}
+# Create DataFrame
+df = pd.DataFrame(data)
+# Save to CSV
+df.to_csv('pizza.csv', index=False)
+dataset=pd.read_csv('pizza.csv')
+dataset.head()
+X=dataset.iloc[:,0:-1].values
+y=dataset.iloc[:,1].values
+X
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=1/3,random_state=0)
+X_train
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train,y_train)
+regressor
+regressor.predict([[30]])
+y_pred=regressor.predict(X_test)
+y_pred
+df1=pd.DataFrame({'Actual':y_test,'Prediction':y_pred})
+df1
+regressor.score(X_test,y_test)
+plt.scatter(X_train,y_train ,color='red')
+plt.plot(X_train,regressor.predict(X_train),color='black')
+plt.title("size vs cost( Training set) ")
+plt.xlabel("size")
+plt.ylabel("cost")
+plt.show()

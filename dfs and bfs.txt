@@ -1,0 +1,50 @@
+# Week 1
+# BFS Implementation
+graph = {
+'5' : ['3', '7'],
+'3' : ['2', '4'],
+'7' : ['8'],
+'2' : [],
+'4' : ['8'],
+'8' : [],
+}
+visited = []
+queue = []
+def bfs(visited, graph, node):
+visited.append(node)
+queue.append(node)
+result = [] # To store the order of traversal
+while queue:
+m = queue.pop(0)
+result.append(m) # Append to result list
+for neighbour in graph[m]:
+if neighbour not in visited:
+visited.append(neighbour)
+queue.append(neighbour)
+# Print the traversal order with "->"
+print(" -> ".join(result))
+print("Following is the breadth-first search:")
+bfs(visited, graph, '5')
+# DFS Implementation
+graph = {
+'5' : ['3', '7'],
+'3' : ['2', '4'],
+'7' : ['8'],
+'2' : [],
+'4' : ['8'],
+'8' : [],
+}
+visited = set()
+def dfs(node, visited, graph):
+result = [] # To store the order of traversal
+def dfs_helper(node):
+if node not in visited:
+visited.add(node)
+result.append(node) # Append to result list
+for i in graph[node]:
+dfs_helper(i)
+dfs_helper(node)
+# Print the traversal order with "->"
+print(" -> ".join(result))
+print("\nFollowing is the depth-first search:")
+dfs("5", visited, graph)
